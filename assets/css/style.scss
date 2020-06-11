@@ -1,0 +1,24 @@
+---
+---
+
+$header-bg-color: #202b3a;
+//$section-headings-color: #f16755;
+$section-headings-color: $header-bg-color;
+
+@import 'jekyll-theme-cayman';
+@import 'photoswipe';
+
+.page-header {
+  // background-color: #202b3a;
+  background-image: none;
+  // color: #FFFFFF;
+
+  .project-tagline {
+    opacity: 1;
+  }
+
+  .logo {
+    width: 400px;
+    max-width: 100%;
+  }
+}
