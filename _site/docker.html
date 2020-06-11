@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+
+    
+    <meta charset="UTF-8">
+
+<!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Podify | Create podcasts from anything youtube-dl can handle</title>
+<meta name="generator" content="Jekyll v4.1.0" />
+<meta property="og:title" content="Podify" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Installation using Docker" />
+<meta property="og:description" content="Installation using Docker" />
+<link rel="canonical" href="http://localhost:4000/docker.html" />
+<meta property="og:url" content="http://localhost:4000/docker.html" />
+<meta property="og:site_name" content="Podify" />
+<script type="application/ld+json">
+{"@type":"WebPage","headline":"Podify","url":"http://localhost:4000/docker.html","description":"Installation using Docker","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#157878">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <meta property="og:title" content="Podify" />
+    <meta property="og:description" content="Create podcasts from anything youtube-dl can handle" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://podify-org.github.io/" />
+    <meta property="og:image"
+          content="/assets/images/logo/square.png" />
+
+    <link rel="stylesheet" href="/assets/css/style.css?v=">
+
+    <script src="/assets/js/photoswipe.js"></script>
+
+    <link rel="icon" type="image/x-icon" href="/assets/images/favicon/16.png" sizes="16x16" />
+    <link rel="icon" type="image/x-icon" href="/assets/images/favicon/32.png" sizes="32x32" />
+  </head>
+  <body>
+    <a id="skip-to-content" href="#content">Skip to the content.</a>
+
+    <header class="page-header" role="banner">
+      <h1 class="project-name">
+        <!-- Podify -->
+        <a href="/">
+          <img class="logo" src="/assets/images/logo/embedded.png" />
+        </a>
+      </h1>
+      <h2 class="project-tagline">Create podcasts from anything youtube-dl can handle</h2>
+
+      <a href="/docker.html" class="btn">Setup using Docker</a>
+      <a href="/screenshots.html" class="btn">Screenshots</a>
+
+      
+        <a href="https://github.com/podify-org/podify" class="btn">View on GitHub</a>
+
+        
+      
+
+      
+    </header>
+
+    <main id="content" class="main-content" role="main">
+      <h2 id="installation-using-docker">Installation using Docker</h2>
+
+<p>Here’s a <a href="docker/docker-compose.example.yml">sample <code class="language-plaintext highlighter-rouge">docker-compose.yml</code></a>.</p>
+
+<h2 id="configuration-via-environment-variables">Configuration via Environment Variables</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Variable</th>
+      <th style="text-align: left">Required</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">DATABASE_URL</td>
+      <td style="text-align: left">Yes</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">postgres://</code> url pointing to postgres database</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">REDIS_URL</td>
+      <td style="text-align: left">Yes</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">redis://</code> url pointing to redis instance</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">URL_HOST</td>
+      <td style="text-align: left">Yes</td>
+      <td style="text-align: left">Where the app will be available, e.g. <code class="language-plaintext highlighter-rouge">https://podify.yourdomain.com</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">SECRET_KEY_BASE</td>
+      <td style="text-align: left">Yes</td>
+      <td style="text-align: left">This is used to encrypt sessions, see <a href="#secret_key_base">below</a></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">STORAGE_DIR</td>
+      <td style="text-align: left">Yes</td>
+      <td style="text-align: left">Where downloads will be stored</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">RAILS_LOG_TO_STDOUT</td>
+      <td style="text-align: left">No</td>
+      <td style="text-align: left">Write logs to stdout so they end up in the docker container logs. <code class="language-plaintext highlighter-rouge">"yes"</code> or <code class="language-plaintext highlighter-rouge">"no"</code> (default: <code class="language-plaintext highlighter-rouge">"no"</code>)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="secret_key_base"><code class="language-plaintext highlighter-rouge">SECRET_KEY_BASE</code></h3>
+
+<p>This is utilized to encrypt and sign sessions. It’s recommended that you generate a new one instead of using the one from the example <code class="language-plaintext highlighter-rouge">docker-compose.yml</code>. You can generate a new one using</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run --rm maxhollmann/podify-worker rails secret
+</code></pre></div></div>
+
+
+      <!--
+      <footer class="site-footer">
+        
+          <span class="site-footer-owner"><a href="https://github.com/podify-org/podify">Podify</a> is maintained by <a href="https://github.com/maxhollmann/">Max Hollmann</a>.</span>
+        
+      </footer>
+      -->
+    </main>
+
+    
+  </body>
+</html>
