@@ -13,24 +13,28 @@
     {% endif %}
     <meta charset="UTF-8">
 
-{% seo %}
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#157878">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-    <meta property="og:title" content="Podify" />
-    <meta property="og:description" content="Create podcasts from anything youtube-dl can handle" />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://podify-org.github.io/" />
-    <meta property="og:image"
-          content="/assets/images/logo/square.png" />
-
     <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
-
-    <script src="/assets/js/photoswipe.js"></script>
 
     <link rel="icon" type="image/x-icon" href="/assets/images/favicon/16.png" sizes="16x16" />
     <link rel="icon" type="image/x-icon" href="/assets/images/favicon/32.png" sizes="32x32" />
+
+    <title>Podify | Create podcasts from anything youtube-dl can handle</title>
+    <meta name="description" content="Podify allows you to create podcasts from Youtube videos and other sites youtube-dl can handle">
+    <meta name="robots" content="all">
+
+    <meta content="en_US" property="og:locale">
+    <meta content="Podify" property="og:site_name">
+    <meta content="website" property="og:type">
+    <meta content="{{ site.url }}" property="og:url">
+    <meta content="Podify | Create podcasts from anything youtube-dl can handle" property="og:title">
+    <meta content="Podify allows you to create podcasts from Youtube videos and other sites youtube-dl can handle" property="og:description">
+    <meta content="{{ site.url }}/assets/images/logo/square.png" property="og:image">
+    <meta content="564" property="og:image:width">
+    <meta content="564" property="og:image:height">
   </head>
   <body>
     <a id="skip-to-content" href="#content">Skip to the content.</a>
@@ -42,7 +46,7 @@
           <img class="logo" src="/assets/images/logo/embedded.png" />
         </a>
       </h1>
-      <h2 class="project-tagline">{{ page.description | default: site.description | default: site.github.project_tagline }}</h2>
+      <h2 class="project-tagline">{{ page.description | default: site.tagline | default: site.github.project_tagline }}</h2>
 
       <a href="/docker.html" class="btn">Setup using Docker</a>
       <a href="/screenshots.html" class="btn">Screenshots</a>

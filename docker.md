@@ -2,6 +2,14 @@
 layout: default
 ---
 
+## Tags
+
+| Tag     | Description                                                                                             |
+|:--------|:--------------------------------------------------------------------------------------------------------|
+| latest  | Latest stable release (but note that the software is still in early development, so stable is relative) |
+| preview | Unstable development releases                                                                           |
+
+
 ## Docker Compose
 
 This is a fully working `docker-compose.yml`, but it is recommended
