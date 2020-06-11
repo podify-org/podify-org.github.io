@@ -22,3 +22,12 @@ $section-headings-color: $header-bg-color;
     max-width: 100%;
   }
 }
+
+.screenshot {
+  display: block;
+
+  &.mobile {
+    display: inline;
+    margin-right: 15px;
+  }
+}
