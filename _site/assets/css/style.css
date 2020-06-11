@@ -428,7 +428,7 @@ a:hover { text-decoration: underline; }
 
 .page-header .logo { width: 400px; max-width: 100%; }
 
-.screenshot { display: block; }
+.screenshot { display: block; margin-bottom: 15px; }
 
 .screenshot.mobile { display: inline; margin-right: 15px; }
 
