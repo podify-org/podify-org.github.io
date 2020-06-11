@@ -10,13 +10,13 @@
 <meta name="generator" content="Jekyll v4.1.0" />
 <meta property="og:title" content="Podify" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Installation using Docker" />
-<meta property="og:description" content="Installation using Docker" />
+<meta name="description" content="Docker Compose" />
+<meta property="og:description" content="Docker Compose" />
 <link rel="canonical" href="http://localhost:4000/docker.html" />
 <meta property="og:url" content="http://localhost:4000/docker.html" />
 <meta property="og:site_name" content="Podify" />
 <script type="application/ld+json">
-{"@type":"WebPage","headline":"Podify","url":"http://localhost:4000/docker.html","description":"Installation using Docker","@context":"https://schema.org"}</script>
+{"@type":"WebPage","headline":"Podify","url":"http://localhost:4000/docker.html","description":"Docker Compose","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -62,9 +62,75 @@
     </header>
 
     <main id="content" class="main-content" role="main">
-      <h2 id="installation-using-docker">Installation using Docker</h2>
+      <h2 id="docker-compose">Docker Compose</h2>
 
-<p>Here’s a <a href="docker/docker-compose.example.yml">sample <code class="language-plaintext highlighter-rouge">docker-compose.yml</code></a>.</p>
+<p>This is a fully working <code class="language-plaintext highlighter-rouge">docker-compose.yml</code>, but it is recommended
+that you switch out at least the <code class="language-plaintext highlighter-rouge">SECRET_KEY_BASE</code> environment
+variable as explained <a href="#secret_key_base">below</a>.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">3.4'</span>
+
+<span class="na">x-app-defaults</span><span class="pi">:</span> <span class="nl">&amp;app-defaults</span>
+  <span class="na">restart</span><span class="pi">:</span> <span class="s">always</span>
+  <span class="na">environment</span><span class="pi">:</span> <span class="nl">&amp;app-env</span>
+    <span class="na">URL_HOST</span><span class="pi">:</span> <span class="s">https://podify.yourdomain.com</span>
+    <span class="na">DATABASE_URL</span><span class="pi">:</span> <span class="s">postgres://podify:verysecurepassword@db/podify</span>
+    <span class="na">REDIS_URL</span><span class="pi">:</span> <span class="s">redis://redis</span>
+    <span class="na">SECRET_KEY_BASE</span><span class="pi">:</span> <span class="s">a57d57661ef5df58b46fab6f04304e89108f22f89b31d2242b31891102da87d519a1f3c6459c1d2716b3b8c5438ef43e06ed4c29c8fb059eb650dc2ec0062d57</span>
+    <span class="na">RAILS_LOG_TO_STDOUT</span><span class="pi">:</span> <span class="s2">"</span><span class="s">yes"</span>
+    <span class="na">STORAGE_DIR</span><span class="pi">:</span> <span class="s">/storage</span>
+
+  <span class="na">volumes</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">storage:/storage</span>
+
+  <span class="na">depends_on</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">db</span>
+    <span class="pi">-</span> <span class="s">redis</span>
+
+<span class="na">services</span><span class="pi">:</span>
+  <span class="na">web</span><span class="pi">:</span>
+    <span class="s">&lt;&lt;</span><span class="pi">:</span> <span class="nv">*app-defaults</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">maxhollmann/podify-web:latest</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">3000:3000</span>
+    <span class="na">environment</span><span class="pi">:</span>
+      <span class="s">&lt;&lt;</span><span class="pi">:</span> <span class="nv">*app-env</span>
+
+  <span class="na">worker</span><span class="pi">:</span>
+    <span class="s">&lt;&lt;</span><span class="pi">:</span> <span class="nv">*app-defaults</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">maxhollmann/podify-worker:latest</span>
+    <span class="na">environment</span><span class="pi">:</span>
+      <span class="s">&lt;&lt;</span><span class="pi">:</span> <span class="nv">*app-env</span>
+
+  <span class="na">db</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">postgres:12.3</span>
+    <span class="na">restart</span><span class="pi">:</span> <span class="s">always</span>
+    <span class="na">environment</span><span class="pi">:</span>
+      <span class="na">POSTGRES_USER</span><span class="pi">:</span> <span class="s">podify</span>
+      <span class="na">POSTGRES_PASSWORD</span><span class="pi">:</span> <span class="s">verysecurepassword</span>
+      <span class="na">PGDATA</span><span class="pi">:</span> <span class="s">/var/lib/postgresql/data/pgdata</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">pgdata:/var/lib/postgresql/data/pgdata</span>
+
+  <span class="na">redis</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">redis:6</span>
+    <span class="na">restart</span><span class="pi">:</span> <span class="s">always</span>
+
+<span class="na">volumes</span><span class="pi">:</span>
+  <span class="na">pgdata</span><span class="pi">:</span>
+  <span class="na">storage</span><span class="pi">:</span>
+</code></pre></div></div>
+
+<p>If you’re using Traefik you will need to set up the
+CustomRequestHeaders middleware using the following labels in addition
+to the labels setting up the endpoint on the <code class="language-plaintext highlighter-rouge">web</code> service:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- "traefik.http.routers.podify.middlewares=sslheader@docker"
+- "traefik.http.middlewares.sslheader.headers.customrequestheaders.X-Forwarded-Proto=https"
+</code></pre></div></div>
+
+<p>The realtime download status updates are sent via websockets and won’t
+work without this.</p>
 
 <h2 id="configuration-via-environment-variables">Configuration via Environment Variables</h2>
 
@@ -110,7 +176,7 @@
   </tbody>
 </table>
 
-<h3 id="secret_key_base"><code class="language-plaintext highlighter-rouge">SECRET_KEY_BASE</code></h3>
+<h3 id="secret_key_base">SECRET_KEY_BASE</h3>
 
 <p>This is utilized to encrypt and sign sessions. It’s recommended that you generate a new one instead of using the one from the example <code class="language-plaintext highlighter-rouge">docker-compose.yml</code>. You can generate a new one using</p>
 
