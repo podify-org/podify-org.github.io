@@ -11,7 +11,7 @@ github:
   repository_url: https://github.com/podify-org/podify
   owner_name: Max Hollmann
   owner_url: https://github.com/maxhollmann/
-  show_star_button: no
+  show_star_button: yes
 
 plugins:
   - jekyll-seo-tag

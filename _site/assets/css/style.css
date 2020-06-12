@@ -1019,7 +1019,8 @@ a {
   text-decoration: underline; }
 
 .page-header {
-  background-image: none; }
+  background-image: none;
+  padding-bottom: 2rem; }
   .page-header .project-tagline {
     opacity: 1; }
   .page-header .logo {
