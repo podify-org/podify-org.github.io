@@ -28,6 +28,9 @@ x-app-defaults: &app-defaults
     SECRET_KEY_BASE: a57d57661ef5df58b46fab6f04304e89108f22f89b31d2242b31891102da87d519a1f3c6459c1d2716b3b8c5438ef43e06ed4c29c8fb059eb650dc2ec0062d57
     RAILS_LOG_TO_STDOUT: "yes"
     STORAGE_DIR: /storage
+    INITIAL_USER_EMAIL: you@example.com
+    INITIAL_USER_PASSWORD: yourpassword
+    ENABLE_SIGNUP: "no"
 
   volumes:
     - storage:/storage
@@ -84,14 +87,17 @@ work without this.
 
 ## Configuration via Environment Variables
 
-| Variable            | Required | Description                                                                                           |
-|:--------------------|:---------|:------------------------------------------------------------------------------------------------------|
-| DATABASE_URL        | Yes      | `postgres://` url pointing to postgres database                                                       |
-| REDIS_URL           | Yes      | `redis://` url pointing to redis instance                                                             |
-| URL_HOST            | Yes      | Where the app will be available, e.g. `https://podify.yourdomain.com`                                 |
-| SECRET_KEY_BASE     | Yes      | This is used to encrypt sessions, see [below](#secret_key_base)                                       |
-| STORAGE_DIR         | Yes      | Where downloads will be stored                                                                        |
-| RAILS_LOG_TO_STDOUT | No       | Write logs to stdout so they end up in the docker container logs. `"yes"` or `"no"` (default: `"no"`) |
+| Variable              | Required | Description                                                                                           |
+|:----------------------|:---------|:------------------------------------------------------------------------------------------------------|
+| DATABASE_URL          | Yes      | `postgres://` url pointing to postgres database                                                       |
+| REDIS_URL             | Yes      | `redis://` url pointing to redis instance                                                             |
+| URL_HOST              | Yes      | Where the app will be available, e.g. `https://podify.yourdomain.com`                                 |
+| SECRET_KEY_BASE       | Yes      | This is used to encrypt sessions, see [below](#secret_key_base)                                       |
+| STORAGE_DIR           | Yes      | Where downloads will be stored                                                                        |
+| RAILS_LOG_TO_STDOUT   | No       | Write logs to stdout so they end up in the docker container logs. `"yes"` or `"no"` (default: `"no"`) |
+| INITIAL_USER_EMAIL    | No       | Email of user to create at startup                                                                    |
+| INITIAL_USER_PASSWORD | No       | Password of user to create at startup                                                                 |
+| ENABLE_SIGNUP         | No       | Allow anyone with access to the site to sign up. `"yes"` or `"no"` (default: `"yes"`)                 |
 
 ### SECRET_KEY_BASE
 

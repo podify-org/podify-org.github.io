@@ -95,6 +95,9 @@ variable as explained <a href="#secret_key_base">below</a>.</p>
     <span class="na">SECRET_KEY_BASE</span><span class="pi">:</span> <span class="s">a57d57661ef5df58b46fab6f04304e89108f22f89b31d2242b31891102da87d519a1f3c6459c1d2716b3b8c5438ef43e06ed4c29c8fb059eb650dc2ec0062d57</span>
     <span class="na">RAILS_LOG_TO_STDOUT</span><span class="pi">:</span> <span class="s2">"</span><span class="s">yes"</span>
     <span class="na">STORAGE_DIR</span><span class="pi">:</span> <span class="s">/storage</span>
+    <span class="na">INITIAL_USER_EMAIL</span><span class="pi">:</span> <span class="s">you@example.com</span>
+    <span class="na">INITIAL_USER_PASSWORD</span><span class="pi">:</span> <span class="s">yourpassword</span>
+    <span class="na">ENABLE_SIGNUP</span><span class="pi">:</span> <span class="s2">"</span><span class="s">no"</span>
 
   <span class="na">volumes</span><span class="pi">:</span>
     <span class="pi">-</span> <span class="s">storage:/storage</span>
@@ -188,6 +191,21 @@ work without this.</p>
       <td style="text-align: left">RAILS_LOG_TO_STDOUT</td>
       <td style="text-align: left">No</td>
       <td style="text-align: left">Write logs to stdout so they end up in the docker container logs. <code class="highlighter-rouge">"yes"</code> or <code class="highlighter-rouge">"no"</code> (default: <code class="highlighter-rouge">"no"</code>)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">INITIAL_USER_EMAIL</td>
+      <td style="text-align: left">No</td>
+      <td style="text-align: left">Email of user to create at startup</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">INITIAL_USER_PASSWORD</td>
+      <td style="text-align: left">No</td>
+      <td style="text-align: left">Password of user to create at startup</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">ENABLE_SIGNUP</td>
+      <td style="text-align: left">No</td>
+      <td style="text-align: left">Allow anyone with access to the site to sign up. <code class="highlighter-rouge">"yes"</code> or <code class="highlighter-rouge">"no"</code> (default: <code class="highlighter-rouge">"yes"</code>)</td>
     </tr>
   </tbody>
 </table>
