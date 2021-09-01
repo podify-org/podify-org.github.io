@@ -42,7 +42,8 @@ x-app-defaults: &app-defaults
 services:
   web:
     <<: *app-defaults
-    image: maxhollmann/podify-web:latest
+    image: maxhollmann/podify:latest
+    command: start-server
     ports:
       - 3000:3000
     environment:
@@ -50,7 +51,8 @@ services:
 
   worker:
     <<: *app-defaults
-    image: maxhollmann/podify-worker:latest
+    image: maxhollmann/podify:latest
+    command: start-server
     environment:
       <<: *app-env
 
@@ -103,4 +105,4 @@ work without this.
 
 This is utilized to encrypt and sign sessions. It's recommended that you generate a new one instead of using the one from the example `docker-compose.yml`. You can generate a new one using
 
-    docker run --rm maxhollmann/podify-worker rails secret
+    docker run --rm maxhollmann/podify rails secret
