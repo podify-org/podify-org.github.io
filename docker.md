@@ -52,7 +52,7 @@ services:
   worker:
     <<: *app-defaults
     image: maxhollmann/podify:latest
-    command: start-server
+    command: start-worker
     environment:
       <<: *app-env
 
