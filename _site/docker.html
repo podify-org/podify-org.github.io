@@ -109,7 +109,8 @@ variable as explained <a href="#secret_key_base">below</a>.</p>
 <span class="na">services</span><span class="pi">:</span>
   <span class="na">web</span><span class="pi">:</span>
     <span class="s">&lt;&lt;</span><span class="pi">:</span> <span class="nv">*app-defaults</span>
-    <span class="na">image</span><span class="pi">:</span> <span class="s">maxhollmann/podify-web:latest</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">maxhollmann/podify:latest</span>
+    <span class="na">command</span><span class="pi">:</span> <span class="s">start-server</span>
     <span class="na">ports</span><span class="pi">:</span>
       <span class="pi">-</span> <span class="s">3000:3000</span>
     <span class="na">environment</span><span class="pi">:</span>
@@ -117,7 +118,8 @@ variable as explained <a href="#secret_key_base">below</a>.</p>
 
   <span class="na">worker</span><span class="pi">:</span>
     <span class="s">&lt;&lt;</span><span class="pi">:</span> <span class="nv">*app-defaults</span>
-    <span class="na">image</span><span class="pi">:</span> <span class="s">maxhollmann/podify-worker:latest</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">maxhollmann/podify:latest</span>
+    <span class="na">command</span><span class="pi">:</span> <span class="s">start-worker</span>
     <span class="na">environment</span><span class="pi">:</span>
       <span class="s">&lt;&lt;</span><span class="pi">:</span> <span class="nv">*app-env</span>
 
@@ -214,7 +216,7 @@ work without this.</p>
 
 <p>This is utilized to encrypt and sign sessions. It’s recommended that you generate a new one instead of using the one from the example <code class="highlighter-rouge">docker-compose.yml</code>. You can generate a new one using</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run --rm maxhollmann/podify-worker rails secret
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run --rm maxhollmann/podify rails secret
 </code></pre></div></div>
 
 
@@ -230,5 +232,8 @@ work without this.</p>
     
       <script async defer src="https://buttons.github.io/buttons.js"></script>
     
+
+    <script defer data-domain="podify.org" src="https://plausible.io/js/script.js"></script>
+
   </body>
 </html>
